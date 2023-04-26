@@ -1,6 +1,6 @@
 import CheckCode from "../../db/SchemaCheckCode";
 const accountSid = "AC071ffe4a6ff6a158f415d2c089f1da18";
-const authToken = "a6108b26137d1f65855deaeb46430586";
+const authToken = "b47507dba0844712c46fa6fed0cdcbb3";
 const TWILIO_NUMBER = "+16074247204";
 
 const client = require("twilio")(accountSid, authToken);
