@@ -9,7 +9,7 @@ import Question from "./collections/Question";
 import Support from "./collections/Support";
 
 export default buildConfig({
-  serverURL: "http://localhost:3000",
+  serverURL: process.env.SERVER,
   admin: {
     user: Users.slug,
   },
