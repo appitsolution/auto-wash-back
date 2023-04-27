@@ -15,18 +15,19 @@ const checkCode = async (req: any, res: any) => {
 
     const numberCodes = await CheckCode.findOne({ number: number });
 
-    if (!numberCodes) {
+    if (numberCodes === null || numberCodes === undefined) {
       await CheckCode.create({
         number: number,
         code: String(code),
       });
-      client.messages
+      await client.messages
         .create({
           body: `Ваш код ${String(code)}`,
           from: TWILIO_NUMBER,
           to: number,
         })
         .then((message) => {
+          console.log(message);
           return res.status(200).send("Code Send");
         })
         .catch((err) => {
@@ -37,6 +38,21 @@ const checkCode = async (req: any, res: any) => {
       await CheckCode.findByIdAndUpdate(numberCodes._id, {
         code: String(code),
       });
+      await client.messages
+        .create({
+          body: `Ваш код ${String(code)}`,
+          from: TWILIO_NUMBER,
+          to: number,
+        })
+        .then((message) => {
+          console.log(message);
+          return res.status(200).send("Code Send");
+        })
+        .catch((err) => {
+          console.error(err);
+          return res.status(500).send("Error");
+        });
+
       return res.status(200).send("Code Send");
     }
   } catch (err) {
