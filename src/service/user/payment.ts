@@ -10,6 +10,7 @@ const payment = async (req, res) => {
   //   res.status(200).send(stdout);
   // });
   // return;
+  console.log(req.body);
   console.log(req.query);
   console.log(req.params);
   return res.send("test");
