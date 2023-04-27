@@ -8,6 +8,7 @@ import {
   checkCode,
   login,
   verify,
+  payment,
 } from "../service/user";
 const router = Router();
 
@@ -19,4 +20,5 @@ router.post("/delete", deleteUser);
 router.post("/check-code", checkCode);
 router.post("/login", login);
 router.post("/verify", verify);
+router.post("/payment", payment);
 export default router;

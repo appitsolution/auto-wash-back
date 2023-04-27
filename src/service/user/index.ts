@@ -6,6 +6,7 @@ import deleteUser from "./deleteUser";
 import checkCode from "./checkCode";
 import login from "./login";
 import verify from "./verify";
+import payment from "./payment";
 
 export {
   changePhone,
@@ -16,4 +17,5 @@ export {
   checkCode,
   login,
   verify,
+  payment,
 };
