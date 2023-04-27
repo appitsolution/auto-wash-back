@@ -20,7 +20,7 @@ const checkCode = async (req: any, res: any) => {
         number: number,
         code: String(code),
       });
-      await client.messages
+      client.messages
         .create({
           body: `Ваш код ${String(code)}`,
           from: TWILIO_NUMBER,
@@ -38,7 +38,7 @@ const checkCode = async (req: any, res: any) => {
       await CheckCode.findByIdAndUpdate(numberCodes._id, {
         code: String(code),
       });
-      await client.messages
+      client.messages
         .create({
           body: `Ваш код ${String(code)}`,
           from: TWILIO_NUMBER,
