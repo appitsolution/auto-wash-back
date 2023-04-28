@@ -7,6 +7,7 @@ import checkCode from "./checkCode";
 import login from "./login";
 import verify from "./verify";
 import payment from "./payment";
+import createOrderPayment from "./createOrderPayment";
 
 export {
   changePhone,
@@ -18,4 +19,5 @@ export {
   login,
   verify,
   payment,
+  createOrderPayment,
 };

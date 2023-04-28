@@ -9,6 +9,7 @@ import {
   login,
   verify,
   payment,
+  createOrderPayment,
 } from "../service/user";
 const router = Router();
 
@@ -20,7 +21,6 @@ router.post("/delete", deleteUser);
 router.post("/check-code", checkCode);
 router.post("/login", login);
 router.post("/verify", verify);
-router.get("/payment", payment);
 router.post("/payment", payment);
-router.patch("/payment", payment);
+router.post("/payment-create", createOrderPayment);
 export default router;

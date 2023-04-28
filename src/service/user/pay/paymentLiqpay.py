@@ -1,11 +1,16 @@
 from liqpay import LiqPay
+import sys
+import os
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-public_key = 'sandbox_i98441757663'
-private_key = 'sandbox_JaBwypsn5eGVcDIIgWDcElXJy6NwEoRXFmh7UuGR'
+# public_key = 'sandbox_i98441757663'
+public_key = os.environ.get('PUBLIC_KEY')
+private_key = os.environ.get("PRIVATE_KEY")
 
 liqpay = LiqPay(public_key, private_key)
 
-payment_id = '000001'
+payment_id = sys.argv[1]
 
 params = {
     'action': 'status',
