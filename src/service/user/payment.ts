@@ -10,13 +10,13 @@ const payment = async (req, res) => {
   try {
     const payment_id = req.query.order;
 
-    // const orderPayment = await OrderPayment.findOne({ orderId: payment_id });
-    // if (orderPayment === undefined || orderPayment === null) {
-    //   return res.status(404).send("Not Found");
-    // }
-    // if (orderPayment.status === "success") {
-    //   // return res.status(404).send("Not Found");
-    // }
+    const orderPayment = await OrderPayment.findOne({ orderId: payment_id });
+    if (orderPayment === undefined || orderPayment === null) {
+      return res.status(404).send("Not Found");
+    }
+    if (orderPayment.status === "success") {
+      return res.status(404).send("Not Found");
+    }
 
     const python_script = "./src/service/user/pay/paymentLiqpay.py";
 
@@ -33,15 +33,15 @@ const payment = async (req, res) => {
       const replace5 = replace4.replaceAll("True", "true");
       const result = JSON.parse(replace5);
 
-      // const user = await User.findOne({ phone: orderPayment.number });
+      const user = await User.findOne({ phone: orderPayment.number });
 
-      // await User.findByIdAndUpdate(user._id, {
-      //   balance: String(Number(user.balance) + result.amount),
-      // });
+      await User.findByIdAndUpdate(user._id, {
+        balance: String(Number(user.balance) + result.amount),
+      });
 
-      // await OrderPayment.findByIdAndUpdate(orderPayment._id, {
-      //   status: "success",
-      // });
+      await OrderPayment.findByIdAndUpdate(orderPayment._id, {
+        status: "success",
+      });
 
       res.status(200).send(result);
     });
