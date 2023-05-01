@@ -67,14 +67,13 @@ const payment = async (req, res) => {
           ],
         });
       } else {
+        console.log(Number(checkWashBalance.balance) + result.amount);
         await User.findByIdAndUpdate(user._id, {
           balanceWash: [
             ...user.balanceWash.filter(({ id }) => id !== checkWashBalance.id),
             {
               ...checkWashBalance,
-              balance: String(
-                Number(checkWashBalance.balance) + Number(result.amount)
-              ),
+              balance: String(Number(checkWashBalance.balance) + result.amount),
             },
           ],
           historyPayment: [
