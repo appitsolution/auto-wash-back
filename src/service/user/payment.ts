@@ -34,6 +34,7 @@ const payment = async (req, res) => {
       const replace3 = await JSON.parse(replace2);
 
       console.log(replace1);
+
       const replace4 = replace3.replace("False", "false");
       const replace5 = replace4.replace("True", "true");
       const result = JSON.parse(replace5);
