@@ -67,8 +67,9 @@ const payment = async (req, res) => {
           ],
         });
       } else {
-        console.log(checkWashBalance["balance"]);
-        console.log(result.amount);
+        console.log(checkWashBalance.balance);
+        console.log(result);
+        console.log(result["amount"]);
         await User.findByIdAndUpdate(user._id, {
           balanceWash: [
             ...user.balanceWash.filter(({ id }) => id !== checkWashBalance.id),
