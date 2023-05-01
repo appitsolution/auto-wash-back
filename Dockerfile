@@ -1,30 +1,28 @@
-FROM node:18.8-alpine as base
+# Используем версию Node.js 14
+FROM node:14
 
-FROM base as builder
+# Установка Python 3
+RUN apt-get update && apt-get install -y python3
 
-WORKDIR /home/node/app
+# Установка зависимостей
+WORKDIR /app
 COPY package*.json ./
+RUN npm install
 
+# Копирование остальных файлов
 COPY . .
-ADD ./src/service/user/pay/paymentLiqpay.py src/service/user/pay/paymentLiqpay.py
-RUN npm install --legacy-peer-deps
+
+# Сборка проекта
 RUN npm run build
 
-FROM base as runtime
-
+# Установка переменных окружения
 ENV NODE_ENV=production
 ENV PAYLOAD_CONFIG_PATH=dist/payload.config.js
 
-WORKDIR /home/node/app
-COPY package*.json  ./
-
-# Add Python
-RUN apk update && apk add --no-cache python3
-
-RUN npm install --production
-COPY --from=builder /home/node/app/dist ./dist
-COPY --from=builder /home/node/app/build ./build
-
+# Открытие порта 3000
 EXPOSE 3000
+
+# Запуск приложения
+
 
 CMD ["node", "dist/server.js"]
