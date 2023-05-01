@@ -15,7 +15,10 @@ const payment = async (req, res) => {
   try {
     const payment_id = req.query.order;
 
+    console.log("test:" + payment_id);
+
     const orderPayment = await OrderPayment.findOne({ orderId: payment_id });
+
     if (orderPayment === undefined || orderPayment === null) {
       return res.status(404).send("Not Found");
     }
@@ -33,7 +36,7 @@ const payment = async (req, res) => {
       const replace2 = replace1.replace("False", "false");
       const replace3 = replace2.replace("True", "true");
 
-      const total = JSON.parse(replace3);
+      const total = await JSON.parse(replace3);
 
       const user = await User.findOne({ phone: orderPayment.number });
 
