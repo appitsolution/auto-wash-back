@@ -25,7 +25,7 @@ const payment = async (req, res) => {
 
     const python_script = "./src/service/user/pay/paymentLiqpay.py";
 
-    const python_process = spawn("python", [python_script, payment_id]);
+    const python_process = spawn("python3", [python_script, payment_id]);
 
     python_process.stdout.on("data", async (data) => {
       const dataString = await data.toString();
