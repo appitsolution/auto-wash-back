@@ -30,9 +30,9 @@ const payment = async (req, res) => {
     python_process.stdout.on("data", async (data) => {
       const dataString = await data.toString();
       console.log(dataString);
-      const replace1 = dataString.replaceAll("'", '"');
-      const replace2 = JSON.stringify(replace1);
-      const replace3 = await JSON.parse(replace2);
+      // const replace1 = dataString.replaceAll("'", '"');
+      // const replace2 = JSON.stringify(replace1);
+      const replace3 = await JSON.parse(dataString);
       const replace4 = replace3.replaceAll("False", "false");
       const replace5 = replace4.replaceAll("True", "true");
       const result = JSON.parse(replace5);
