@@ -29,12 +29,13 @@ const payment = async (req, res) => {
 
     python_process.stdout.on("data", async (data) => {
       const dataString = await data.toString();
-      console.log(dataString);
       const replace1 = dataString.replace(/'/g, '"');
       const replace2 = JSON.stringify(replace1);
       const replace3 = await JSON.parse(replace2);
-      const replace4 = replace3.replaceAll("False", "false");
-      const replace5 = replace4.replaceAll("True", "true");
+
+      console.log(replace1);
+      const replace4 = replace3.replace("False", "false");
+      const replace5 = replace4.replace("True", "true");
       const result = JSON.parse(replace5);
 
       const user = await User.findOne({ phone: orderPayment.number });
