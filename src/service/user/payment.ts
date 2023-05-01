@@ -41,6 +41,8 @@ const payment = async (req, res) => {
         (item) => item.id === orderPayment.washId
       );
 
+      console.log(total);
+
       if (checkWashBalance === undefined) {
         await User.findByIdAndUpdate(user._id, {
           balanceWash: [
