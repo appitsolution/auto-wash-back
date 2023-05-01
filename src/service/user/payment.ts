@@ -15,8 +15,6 @@ const payment = async (req, res) => {
   try {
     const payment_id = req.query.order;
 
-    console.log("test:" + payment_id);
-
     const orderPayment = await OrderPayment.findOne({ orderId: payment_id });
 
     if (orderPayment === undefined || orderPayment === null) {
