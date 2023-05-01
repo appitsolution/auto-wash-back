@@ -16,27 +16,25 @@ const payment = async (req, res) => {
     const payment_id = req.query.order;
 
     const orderPayment = await OrderPayment.findOne({ orderId: payment_id });
-    if (orderPayment === undefined || orderPayment === null) {
-      return res.status(404).send("Not Found");
-    }
-    if (orderPayment.status === "success") {
-      return res.status(404).send("Not Found");
-    }
+    // if (orderPayment === undefined || orderPayment === null) {
+    //   return res.status(404).send("Not Found");
+    // }
+    // if (orderPayment.status === "success") {
+    //   return res.status(404).send("Not Found");
+    // }
 
     const python_script = "src/service/user/pay/paymentLiqpay.py";
 
-    const python_process = spawn("python3", [python_script, payment_id]);
+    const python_process = spawn("python", [python_script, payment_id]);
 
     python_process.stdout.on("data", async (data) => {
       const dataString = await data.toString();
       const replace1 = dataString.replace(/'/g, '"');
-      const replace2 = JSON.stringify(replace1);
-      const replace3 = replace2.replace("False", "false");
-      const replace4 = replace3.replace("True", "true");
+      const replace2 = replace1.replace("False", "false");
+      const replace3 = replace2.replace("True", "true");
 
-      const result = await JSON.parse(replace4);
+      const total = JSON.parse(replace3);
 
-      console.log(result);
       const user = await User.findOne({ phone: orderPayment.number });
 
       const checkWashBalance = user.balanceWash.find(
@@ -50,7 +48,7 @@ const payment = async (req, res) => {
             {
               id: orderPayment.washId,
               address: orderPayment.addressWash,
-              balance: String(result.amount),
+              balance: String(total.amount),
             },
           ],
           historyPayment: [
@@ -58,21 +56,18 @@ const payment = async (req, res) => {
             {
               title: orderPayment.titleWash,
               address: orderPayment.addressWash,
-              balance: result.amount,
+              balance: String(total.amount),
               date: `${day}.${month}.${year}`,
             },
           ],
         });
       } else {
-        // console.log(checkWashBalance.balance);
-        console.log(result);
-        console.log("amount:" + result["amount"]);
         await User.findByIdAndUpdate(user._id, {
           balanceWash: [
             ...user.balanceWash.filter(({ id }) => id !== checkWashBalance.id),
             {
               ...checkWashBalance,
-              balance: String(Number(checkWashBalance.balance) + result.amount),
+              balance: String(Number(checkWashBalance.balance) + total.amount),
             },
           ],
           historyPayment: [
@@ -80,7 +75,7 @@ const payment = async (req, res) => {
             {
               title: orderPayment.titleWash,
               address: orderPayment.addressWash,
-              balance: result.amount,
+              balance: String(total.amount),
               date: `${day}.${month}.${year}`,
             },
           ],
@@ -91,7 +86,7 @@ const payment = async (req, res) => {
         status: "success",
       });
 
-      res.status(200).send(result);
+      res.status(200).send(total);
     });
 
     python_process.stderr.on("data", (data) => {
