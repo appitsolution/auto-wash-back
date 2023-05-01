@@ -2,7 +2,9 @@
 FROM node:14
 
 # Установка Python 3
-RUN apt-get update && apt-get install -y python3
+RUN apt-get update && apt-get install -y python3 python3-pip
+COPY requirements.txt /app/
+RUN pip3 install --no-cache-dir -r /app/requirements.txt
 
 # Установка зависимостей
 WORKDIR /app
