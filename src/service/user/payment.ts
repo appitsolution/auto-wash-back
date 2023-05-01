@@ -31,13 +31,12 @@ const payment = async (req, res) => {
       const dataString = await data.toString();
       const replace1 = dataString.replace(/'/g, '"');
       const replace2 = JSON.stringify(replace1);
-      const replace3 = await JSON.parse(replace2);
+      const replace3 = replace2.replace("False", "false");
+      const replace4 = replace3.replace("True", "true");
 
       console.log(replace1);
 
-      const replace4 = replace3.replace("False", "false");
-      const replace5 = replace4.replace("True", "true");
-      const result = JSON.parse(replace5);
+      const result = await JSON.parse(replace4);
 
       const user = await User.findOne({ phone: orderPayment.number });
 
