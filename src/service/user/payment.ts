@@ -23,7 +23,7 @@ const payment = async (req, res) => {
       return res.status(404).send("Not Found");
     }
 
-    const python_script = "./src/service/user/pay/paymentLiqpay.py";
+    const python_script = "src/service/user/pay/paymentLiqpay.py";
 
     const python_process = spawn("python3", [python_script, payment_id]);
 
