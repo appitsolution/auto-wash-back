@@ -26,7 +26,7 @@ const login = async (req: any, res: any) => {
             phone: number,
             numbersCar: [],
             balance: "0",
-            balanceWash: {},
+            balanceWash: [],
             historyPayment: [],
           });
 

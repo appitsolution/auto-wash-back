@@ -5,6 +5,18 @@ const OrderPaymentSchema = new Schema({
     type: String,
     required: true,
   },
+  washId: {
+    type: String,
+    required: true,
+  },
+  titleWash: {
+    type: String,
+    required: true,
+  },
+  addressWash: {
+    type: String,
+    required: true,
+  },
   number: {
     type: String,
     required: true,

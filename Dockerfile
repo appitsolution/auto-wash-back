@@ -17,6 +17,9 @@ ENV PAYLOAD_CONFIG_PATH=dist/payload.config.js
 WORKDIR /home/node/app
 COPY package*.json  ./
 
+# Add Python
+RUN apk update && apk add --no-cache python3
+
 RUN npm install --production
 COPY --from=builder /home/node/app/dist ./dist
 COPY --from=builder /home/node/app/build ./build

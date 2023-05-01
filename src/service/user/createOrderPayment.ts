@@ -1,7 +1,7 @@
 import OrderPayment from "../../db/SchemaOrder";
 
 const createOrderPayment = async (req, res) => {
-  const { orderId, number } = req.body;
+  const { orderId, number, washId, titleWash, addressWash } = req.body;
 
   if (!orderId || !number) {
     return res.status(400).send("Not enough arguments");
@@ -10,6 +10,9 @@ const createOrderPayment = async (req, res) => {
   try {
     await OrderPayment.create({
       orderId: orderId,
+      washId: washId,
+      titleWash: titleWash,
+      addressWash: addressWash,
       number: number,
       status: "wait",
     });
