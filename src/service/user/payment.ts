@@ -3,7 +3,6 @@ import User from "../../db/SchemaUser";
 const { spawn } = require("child_process");
 
 const payment = async (req, res) => {
-  console.log(req.body);
   const currentDate = new Date();
   const day = currentDate.getDate().toString().padStart(2, "0");
   const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
