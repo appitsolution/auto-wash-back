@@ -16,16 +16,16 @@ const payment = async (req, res) => {
     const payment_id = req.query.order;
 
     const orderPayment = await OrderPayment.findOne({ orderId: payment_id });
-    // if (orderPayment === undefined || orderPayment === null) {
-    //   return res.status(404).send("Not Found");
-    // }
-    // if (orderPayment.status === "success") {
-    //   return res.status(404).send("Not Found");
-    // }
+    if (orderPayment === undefined || orderPayment === null) {
+      return res.status(404).send("Not Found");
+    }
+    if (orderPayment.status === "success") {
+      return res.status(404).send("Not Found");
+    }
 
     const python_script = "src/service/user/pay/paymentLiqpay.py";
 
-    const python_process = spawn("python", [python_script, payment_id]);
+    const python_process = spawn("python3", [python_script, payment_id]);
 
     python_process.stdout.on("data", async (data) => {
       const dataString = await data.toString();
