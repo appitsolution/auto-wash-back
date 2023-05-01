@@ -89,7 +89,7 @@ const payment = async (req, res) => {
         status: "success",
       });
 
-      res.status(200).send(total);
+      return res.redirect("https://auto-wash-psi.vercel.app/info");
     });
 
     python_process.stderr.on("data", (data) => {
