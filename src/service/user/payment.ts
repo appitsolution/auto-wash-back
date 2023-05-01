@@ -34,17 +34,14 @@ const payment = async (req, res) => {
       const replace3 = replace2.replace("False", "false");
       const replace4 = replace3.replace("True", "true");
 
-      console.log(replace1);
-
       const result = await JSON.parse(replace4);
 
+      console.log(result);
       const user = await User.findOne({ phone: orderPayment.number });
 
       const checkWashBalance = user.balanceWash.find(
         (item) => item.id === orderPayment.washId
       );
-
-      console.log(checkWashBalance);
 
       if (checkWashBalance === undefined) {
         await User.findByIdAndUpdate(user._id, {
@@ -67,9 +64,9 @@ const payment = async (req, res) => {
           ],
         });
       } else {
-        console.log(checkWashBalance.balance);
+        // console.log(checkWashBalance.balance);
         console.log(result);
-        console.log(result["amount"]);
+        console.log("amount:" + result["amount"]);
         await User.findByIdAndUpdate(user._id, {
           balanceWash: [
             ...user.balanceWash.filter(({ id }) => id !== checkWashBalance.id),
