@@ -6,6 +6,7 @@ WORKDIR /home/node/app
 COPY package*.json ./
 
 COPY . .
+ADD ./src/service/user/pay/paymentLiqpay.py src/service/user/pay/paymentLiqpay.py
 RUN npm install --legacy-peer-deps
 RUN npm run build
 
