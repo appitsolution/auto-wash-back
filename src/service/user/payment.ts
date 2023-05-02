@@ -17,7 +17,7 @@ const payment = async (req, res) => {
 
     const orderPayment = await OrderPayment.findOne({ orderId: payment_id });
 
-    if (orderPayment === undefined || orderPayment === null) {
+    if (orderPayment === undefined) {
       return res.status(404).send("Not Found");
     }
     if (orderPayment.status === "success") {
