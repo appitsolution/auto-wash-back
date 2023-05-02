@@ -20,38 +20,38 @@ const checkCode = async (req: any, res: any) => {
         number: number,
         code: String(code),
       });
-      client.messages
-        .create({
-          body: `Ваш код ${String(code)}`,
-          from: TWILIO_NUMBER,
-          to: number,
-        })
-        .then((message) => {
-          console.log(message);
-          return res.status(200).send("Code Send");
-        })
-        .catch((err) => {
-          console.error(err);
-          return res.status(500).send("Error");
-        });
+      // client.messages
+      //   .create({
+      //     body: `Ваш код ${String(code)}`,
+      //     from: TWILIO_NUMBER,
+      //     to: number,
+      //   })
+      //   .then((message) => {
+      //     console.log(message);
+      //     return res.status(200).send("Code Send");
+      //   })
+      //   .catch((err) => {
+      //     console.error(err);
+      //     return res.status(500).send("Error");
+      //   });
     } else {
       await CheckCode.findByIdAndUpdate(numberCodes._id, {
         code: String(code),
       });
-      client.messages
-        .create({
-          body: `Ваш код ${String(code)}`,
-          from: TWILIO_NUMBER,
-          to: number,
-        })
-        .then((message) => {
-          console.log(message);
-          return res.status(200).send("Code Send");
-        })
-        .catch((err) => {
-          console.error(err);
-          return res.status(500).send("Error");
-        });
+      // client.messages
+      //   .create({
+      //     body: `Ваш код ${String(code)}`,
+      //     from: TWILIO_NUMBER,
+      //     to: number,
+      //   })
+      //   .then((message) => {
+      //     console.log(message);
+      //     return res.status(200).send("Code Send");
+      //   })
+      //   .catch((err) => {
+      //     console.error(err);
+      //     return res.status(500).send("Error");
+      //   });
 
       return res.status(200).send("Code Send");
     }
