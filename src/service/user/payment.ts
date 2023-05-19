@@ -44,6 +44,14 @@ const payment = async (req, res) => {
 
       console.log(total);
 
+      if (total.status === "error") {
+        await OrderPayment.findByIdAndUpdate(orderPayment._id, {
+          status: "error",
+        });
+
+        return res.redirect("https://auto-wash-psi.vercel.app/info");
+      }
+
       if (checkWashBalance === undefined) {
         await User.findByIdAndUpdate(user._id, {
           balanceWash: [

@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import CheckCode from "../../db/SchemaCheckCode";
 import User from "../../db/SchemaUser";
+import payload from "payload";
 
 const login = async (req: any, res: any) => {
   const { number, code } = req.body;
@@ -31,9 +32,8 @@ const login = async (req: any, res: any) => {
           });
 
           await CheckCode.findByIdAndDelete(numberCode._id);
-
-          const payload = newUser.phone;
-          const token = await jwt.sign(payload, process.env.TOKEN_KEY);
+          const payloadToken = newUser.phone;
+          const token = await jwt.sign(payloadToken, process.env.TOKEN_KEY);
 
           return res.status(201).send(token);
         } else {
