@@ -7,6 +7,7 @@ import Wash from "./collections/Wash";
 import Media from "./collections/Media";
 import Question from "./collections/Question";
 import Support from "./collections/Support";
+import Payments from "./collections/Payments";
 
 export default buildConfig({
   serverURL: process.env.SERVER,
@@ -20,6 +21,7 @@ export default buildConfig({
     Media,
     Question,
     Support,
+    Payments,
     // Add Collections here
     // Examples,
   ],

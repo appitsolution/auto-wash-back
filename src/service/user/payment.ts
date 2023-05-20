@@ -1,3 +1,4 @@
+import payload from "payload";
 import OrderPayment from "../../db/SchemaOrder";
 import User from "../../db/SchemaUser";
 const { spawn } = require("child_process");
@@ -92,6 +93,14 @@ const payment = async (req, res) => {
           ],
         });
       }
+
+      await payload.create({
+        collection: "payments",
+        data: {
+          number: user.phone,
+          sum: total.amount,
+        },
+      });
 
       await OrderPayment.findByIdAndUpdate(orderPayment._id, {
         status: "success",
