@@ -39,6 +39,35 @@ const Wash: CollectionConfig = {
       type: "richText",
       required: true,
     },
+    {
+      name: "posts",
+      type: "array",
+      fields: [
+        {
+          name: "id",
+          type: "text",
+        },
+        {
+          name: "number",
+          type: "text",
+        },
+        {
+          name: "active",
+          type: "select",
+          options: [
+            {
+              label: "Active",
+              value: "True",
+            },
+            {
+              label: "Not Active",
+              value: "False",
+            },
+          ],
+        },
+      ],
+      required: true,
+    },
   ],
 };
 
