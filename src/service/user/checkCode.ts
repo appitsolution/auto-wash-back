@@ -1,9 +1,18 @@
+import payload from "payload";
 import CheckCode from "../../db/SchemaCheckCode";
 const accountSid = "AC071ffe4a6ff6a158f415d2c089f1da18";
 const authToken = "b47507dba0844712c46fa6fed0cdcbb3";
 const TWILIO_NUMBER = "+16074247204";
 
 const client = require("twilio")(accountSid, authToken);
+
+const returnDate = () => {
+  const date = new Date();
+  const formattedDate = date.toISOString();
+  console.log(formattedDate);
+
+  return formattedDate;
+};
 
 const checkCode = async (req: any, res: any) => {
   const { number } = req.body;
@@ -34,6 +43,12 @@ const checkCode = async (req: any, res: any) => {
       //     console.error(err);
       //     return res.status(500).send("Error");
       //   });
+      await payload.create({
+        collection: "log-sms",
+        data: { phone: number, date: returnDate() },
+      });
+
+      return res.status(200).send("Code Send");
     } else {
       await CheckCode.findByIdAndUpdate(numberCodes._id, {
         code: String(code),
@@ -52,6 +67,10 @@ const checkCode = async (req: any, res: any) => {
       //     console.error(err);
       //     return res.status(500).send("Error");
       //   });
+      await payload.create({
+        collection: "log-sms",
+        data: { phone: number, date: returnDate() },
+      });
 
       return res.status(200).send("Code Send");
     }

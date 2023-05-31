@@ -3,6 +3,14 @@ import OrderPayment from "../../db/SchemaOrder";
 import User from "../../db/SchemaUser";
 const { spawn } = require("child_process");
 
+const returnDate = () => {
+  const date = new Date();
+  const formattedDate = date.toISOString();
+  console.log(formattedDate);
+
+  return formattedDate;
+};
+
 const payment = async (req, res) => {
   const currentDate = new Date();
   const day = currentDate.getDate().toString().padStart(2, "0");
@@ -99,6 +107,15 @@ const payment = async (req, res) => {
         data: {
           number: user.phone,
           sum: total.amount,
+        },
+      });
+
+      await payload.create({
+        collection: "log-payment",
+        data: {
+          number: user.phone,
+          sum: total.amount,
+          date: returnDate(),
         },
       });
 

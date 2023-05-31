@@ -8,6 +8,8 @@ import Media from "./collections/Media";
 import Question from "./collections/Question";
 import Support from "./collections/Support";
 import Payments from "./collections/Payments";
+import LogSms from "./collections/LogSms";
+import LogPayment from "./collections/LogPayment";
 
 export default buildConfig({
   serverURL: process.env.SERVER,
@@ -22,6 +24,8 @@ export default buildConfig({
     Question,
     Support,
     Payments,
+    LogSms,
+    LogPayment,
     // Add Collections here
     // Examples,
   ],
