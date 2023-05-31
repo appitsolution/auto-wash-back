@@ -114,10 +114,11 @@ const payment = async (req, res) => {
         collection: "log-payment",
         data: {
           number: user.phone,
-          sum: total.amount,
+          amount: total.amount,
           date: returnDate(),
         },
       });
+      console.log(user.phone);
 
       await OrderPayment.findByIdAndUpdate(orderPayment._id, {
         status: "success",
