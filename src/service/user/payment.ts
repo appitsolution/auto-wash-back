@@ -113,7 +113,7 @@ const payment = async (req, res) => {
       await payload.create({
         collection: "log-payment",
         data: {
-          number: user.phone,
+          phone: user.phone,
           amount: total.amount,
           date: returnDate(),
         },
