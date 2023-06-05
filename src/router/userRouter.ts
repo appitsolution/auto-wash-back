@@ -11,6 +11,8 @@ import {
   payment,
   createOrderPayment,
 } from "../service/user";
+import createOrderNotRegister from "../service/user/createOrderNotRegister";
+import paymentNotRegister from "../service/user/paymentNotRegister";
 const router = Router();
 
 router.post("/change-phone", changePhone);
@@ -22,5 +24,7 @@ router.post("/check-code", checkCode);
 router.post("/login", login);
 router.post("/verify", verify);
 router.post("/payment", payment);
+router.post("/payment-not-register", paymentNotRegister);
 router.post("/payment-create", createOrderPayment);
+router.post("/payment-create-not-register", createOrderNotRegister);
 export default router;
