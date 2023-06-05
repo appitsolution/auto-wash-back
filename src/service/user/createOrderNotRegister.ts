@@ -1,7 +1,9 @@
 import OrderPayment from "../../db/SchemaOrderNotRegister";
 
 const createOrderNotRegister = async (req, res) => {
-  const { orderId, washId, titleWash, addressWash, washNumberPost } = req.body;
+  const { orderId, washId, washNumberPost, titleWash, addressWash } = req.body;
+
+  console.log(req.body);
 
   if (!orderId) {
     return res.status(400).send("Not enough arguments");
