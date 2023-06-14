@@ -51,7 +51,9 @@ const paymentNotRegister = async (req, res) => {
           status: "error",
         });
 
-        return res.redirect("https://auto-wash-psi.vercel.app/info");
+        return res.redirect(
+          `https://auto-wash-psi.vercel.app/wash/${orderPayment.washId}`
+        );
       }
 
       //   await payload.create({
