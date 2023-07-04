@@ -56,13 +56,13 @@ const paymentNotRegister = async (req, res) => {
         );
       }
 
-      //   await payload.create({
-      //     collection: "payments",
-      //     data: {
-      //       number: user.phone,
-      //       sum: total.amount,
-      //     },
-      //   });
+      await payload.create({
+        collection: "payments",
+        data: {
+          number: user.phone,
+          sum: total.amount,
+        },
+      });
 
       //   await payload.create({
       //     collection: "log-payment",

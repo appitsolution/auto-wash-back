@@ -23,6 +23,11 @@ const Wash: CollectionConfig = {
       required: true,
     },
     {
+      name: "phoneWash",
+      type: "text",
+      required: true,
+    },
+    {
       name: "images",
       type: "array",
       fields: [
