@@ -25,7 +25,6 @@ const Wash: CollectionConfig = {
     {
       name: "phoneWash",
       type: "text",
-      required: true,
     },
     {
       name: "images",
