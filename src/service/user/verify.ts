@@ -2,6 +2,7 @@ import User from "../../db/SchemaUser";
 import jwt from "jsonwebtoken";
 
 const verify = async (req: any, res: any) => {
+  console.log("ok");
   const { token } = req.body;
 
   if (!token) return res.status(400).send("Not enough arguments");

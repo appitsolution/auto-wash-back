@@ -12,7 +12,7 @@ import LogSms from "./collections/LogSms";
 import LogPayment from "./collections/LogPayment";
 
 export default buildConfig({
-  serverURL: process.env.SERVER,
+  serverURL: "http://localhost:3000",
   admin: {
     user: Users.slug,
   },
