@@ -1,10 +1,6 @@
 import payload from "payload";
 import CheckCode from "../../db/SchemaCheckCode";
-const accountSid = "AC071ffe4a6ff6a158f415d2c089f1da18";
-const authToken = "b47507dba0844712c46fa6fed0cdcbb3";
-const TWILIO_NUMBER = "+16074247204";
-
-const client = require("twilio")(accountSid, authToken);
+import sendSMS from "../../utils/sendSMS";
 
 const returnDate = () => {
   const date = new Date();
@@ -29,20 +25,9 @@ const checkCode = async (req: any, res: any) => {
         number: number,
         code: String(code),
       });
-      // client.messages
-      //   .create({
-      //     body: `Ваш код ${String(code)}`,
-      //     from: TWILIO_NUMBER,
-      //     to: number,
-      //   })
-      //   .then((message) => {
-      //     console.log(message);
-      //     return res.status(200).send("Code Send");
-      //   })
-      //   .catch((err) => {
-      //     console.error(err);
-      //     return res.status(500).send("Error");
-      //   });
+
+      await sendSMS(number, `Ваш код ${String(code)}`);
+
       await payload.create({
         collection: "log-sms",
         data: { phone: number, date: returnDate() },
@@ -53,20 +38,9 @@ const checkCode = async (req: any, res: any) => {
       await CheckCode.findByIdAndUpdate(numberCodes._id, {
         code: String(code),
       });
-      // client.messages
-      //   .create({
-      //     body: `Ваш код ${String(code)}`,
-      //     from: TWILIO_NUMBER,
-      //     to: number,
-      //   })
-      //   .then((message) => {
-      //     console.log(message);
-      //     return res.status(200).send("Code Send");
-      //   })
-      //   .catch((err) => {
-      //     console.error(err);
-      //     return res.status(500).send("Error");
-      //   });
+
+      await sendSMS(number, `Ваш код ${String(code)}`);
+
       await payload.create({
         collection: "log-sms",
         data: { phone: number, date: returnDate() },
