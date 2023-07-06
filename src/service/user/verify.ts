@@ -2,7 +2,6 @@ import User from "../../db/SchemaUser";
 import jwt from "jsonwebtoken";
 
 const verify = async (req: any, res: any) => {
-  console.log("ok");
   const { token } = req.body;
 
   if (!token) return res.status(400).send("Not enough arguments");
@@ -12,12 +11,12 @@ const verify = async (req: any, res: any) => {
 
     const user = await User.findOne({ phone: phone });
 
-    if (!user) return res.status(404).send("Not Found");
+    if (!user) return res.json({ status: 404, message: "notFound" });
 
-    return res.status(200).send(user);
+    return res.json({ status: 200, data: user });
   } catch (err) {
     console.log(err);
-    return res.status(500);
+    return res.json({ status: 500, message: "invalid token" });
   }
 };
 
