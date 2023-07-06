@@ -7,7 +7,7 @@ const encoded = () => {
   const clientSecret = process.env.SMS_CLIENT_SECRET;
 
   const authString = `${clientId}:${clientSecret}`;
-  const encodedAuthString = btoa(authString);
+  const encodedAuthString = Buffer.from(authString, "utf-8").toString("base64");
 
   return encodedAuthString;
 };
