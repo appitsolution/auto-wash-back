@@ -1,5 +1,5 @@
 // import axios from "axios";
-const axios = require("axios");
+import axios from "axios";
 require("dotenv").config();
 
 const encoded = () => {
@@ -26,6 +26,7 @@ const sendSMS = async (phone: string, text: string) => {
         },
       }
     );
+    console.log("token", token.data);
 
     const requestSendSMS = await axios.post(
       "https://api-gateway.kyivstar.ua/sandbox/rest/v1beta/sms",
@@ -36,9 +37,9 @@ const sendSMS = async (phone: string, text: string) => {
       },
       { headers: { Authorization: `Bearer ${token.data.access_token}` } }
     );
-    console.log(requestSendSMS.data);
+    console.log("Res: ", requestSendSMS.data);
   } catch (err) {
-    console.log(err.response);
+    console.log(err);
   }
 };
 
