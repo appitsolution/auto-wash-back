@@ -45,6 +45,7 @@ const Wash: CollectionConfig = {
     },
     {
       name: "schedule",
+      label: "Графік роботи",
       type: "group",
       fields: [
         {
