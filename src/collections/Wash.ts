@@ -18,6 +18,17 @@ const Wash: CollectionConfig = {
       required: true,
     },
     {
+      name: "categories",
+      type: "array",
+      fields: [
+        {
+          name: "category",
+          type: "relationship",
+          relationTo: "categories-wash",
+        },
+      ],
+    },
+    {
       name: "address",
       type: "text",
       required: true,
