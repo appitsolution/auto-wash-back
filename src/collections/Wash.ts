@@ -6,6 +6,7 @@ const Wash: CollectionConfig = {
   access: {
     read: () => true,
   },
+
   fields: [
     {
       name: "id",
@@ -25,13 +26,55 @@ const Wash: CollectionConfig = {
           name: "category",
           type: "relationship",
           relationTo: "categories-wash",
+          required: true,
         },
       ],
+      minRows: 1,
+      required: true,
+    },
+
+    {
+      name: "city",
+      type: "text",
+      required: true,
     },
     {
       name: "address",
       type: "text",
       required: true,
+    },
+    {
+      name: "schedule",
+      type: "group",
+      fields: [
+        {
+          name: "timeIn",
+          type: "text",
+          label: "Час відкриття",
+          admin: {
+            description: "Приклад: 12:00 , 09:05",
+          },
+          required: true,
+        },
+        {
+          name: "timeOut",
+          type: "text",
+          label: "Час закриття",
+          admin: {
+            description: "Приклад: 12:00 , 09:05",
+          },
+          required: true,
+        },
+        {
+          name: "weekend",
+          type: "array",
+          label: "Вихідні",
+          admin: {
+            description: "Приклад: ВТ СБ ПН",
+          },
+          fields: [{ name: "day", type: "text", label: "День" }],
+        },
+      ],
     },
     {
       name: "phoneWash",
@@ -61,10 +104,12 @@ const Wash: CollectionConfig = {
         {
           name: "id",
           type: "text",
+          required: true,
         },
         {
           name: "number",
           type: "text",
+          required: true,
         },
         {
           name: "active",
@@ -79,8 +124,10 @@ const Wash: CollectionConfig = {
               value: "False",
             },
           ],
+          required: true,
         },
       ],
+      minRows: 1,
       required: true,
     },
   ],
