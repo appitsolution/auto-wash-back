@@ -31,7 +31,7 @@ const sendSMS = async (phone: string, text: string) => {
     const requestSendSMS = await axios.post(
       "https://api-gateway.kyivstar.ua/sandbox/rest/v1beta/sms",
       {
-        from: "messagedesk",
+        from: "CWB",
         to: phone,
         text: text,
       },

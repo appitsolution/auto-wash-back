@@ -17,6 +17,7 @@ const Wash: CollectionConfig = {
       name: "title",
       type: "text",
       required: true,
+      localized: true,
     },
     {
       name: "categories",
@@ -37,11 +38,13 @@ const Wash: CollectionConfig = {
       name: "city",
       type: "text",
       required: true,
+      localized: true,
     },
     {
       name: "address",
       type: "text",
       required: true,
+      localized: true,
     },
     {
       name: "schedule",
@@ -97,6 +100,7 @@ const Wash: CollectionConfig = {
       name: "description",
       type: "richText",
       required: true,
+      localized: true,
     },
     {
       name: "posts",

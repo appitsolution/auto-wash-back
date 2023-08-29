@@ -31,6 +31,13 @@ export default buildConfig({
     // Add Collections here
     // Examples,
   ],
+
+  localization: {
+    locales: ["ua", "en", "ru"],
+    defaultLocale: "ua",
+    fallback: true,
+  },
+
   typescript: {
     outputFile: path.resolve(__dirname, "payload-types.ts"),
   },
