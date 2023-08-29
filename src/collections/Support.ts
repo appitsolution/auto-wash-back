@@ -28,6 +28,7 @@ const Support: CollectionConfig = {
         {
           name: "title",
           type: "text",
+          localized: true,
         },
         {
           name: "icon",

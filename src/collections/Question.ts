@@ -10,14 +10,17 @@ const Question: CollectionConfig = {
     {
       name: "title",
       type: "text",
+        localized: true,
     },
     {
       name: "description",
       type: "text",
+        localized: true,
     },
     {
       name: "answer",
       type: "richText",
+        localized: true,
     },
     {
       name: "image",

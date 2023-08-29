@@ -10,6 +10,7 @@ const Discount: CollectionConfig = {
     {
       name: "title",
       type: "text",
+      localized: true,
     },
     {
       name: "dateStart",
@@ -22,6 +23,7 @@ const Discount: CollectionConfig = {
     {
       name: "description",
       type: "richText",
+      localized: true,
     },
     {
       name: "image",
