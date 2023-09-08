@@ -49,7 +49,7 @@ const sendSMS = async (phone: string, text: string) => {
       "https://cpa3.kyivstar.ua/api/contents",
       {
         source: "CWB",
-        destination: "380670000001",
+        destination: phone.slice(1),
         serviceType: "true",
         bearerType: "sms",
         contentType: "text/plain",
