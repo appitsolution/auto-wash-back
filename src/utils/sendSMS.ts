@@ -50,7 +50,7 @@ const sendSMS = async (phone: string, text: string) => {
       {
         source: "CWB",
         destination: phone.slice(1),
-        serviceType: "true",
+        serviceType: "104",
         bearerType: "sms",
         contentType: "text/plain",
         content: text,
