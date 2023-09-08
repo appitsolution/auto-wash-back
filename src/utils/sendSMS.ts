@@ -12,32 +12,52 @@ const encoded = () => {
   return encodedAuthString;
 };
 
+// const sendSMS = async (phone: string, text: string) => {
+//   try {
+//     const token = await axios.post(
+//       `https://api-gateway.kyivstar.ua/idp/oauth2/token`,
+//       {
+//         grant_type: "client_credentials",
+//       },
+//       {
+//         headers: {
+//           "Content-Type": "application/x-www-form-urlencoded",
+//           authorization: `Basic ${encoded()}`,
+//         },
+//       }
+//     );
+//     // console.log("token", token.data);
+
+//     const requestSendSMS = await axios.post(
+//       "https://api-gateway.kyivstar.ua/sandbox/rest/v1beta/sms",
+//       {
+//         from: "CWB",
+//         to: phone,
+//         text: text,
+//       },
+//       { headers: { Authorization: `Bearer ${token.data.access_token}` } }
+//     );
+//     // console.log("Res: ", requestSendSMS.data);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
+
 const sendSMS = async (phone: string, text: string) => {
   try {
-    const token = await axios.post(
-      `https://api-gateway.kyivstar.ua/idp/oauth2/token`,
+    const result = await axios.post(
+      "https://cpa3.kyivstar.ua/api/contents",
       {
-        grant_type: "client_credentials",
+        source: "CWB",
+        destination: phone,
+        serviceType: "true",
+        bearerType: "sms",
+        contentType: "text/plain",
+        content: text,
       },
-      {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          authorization: `Basic ${encoded()}`,
-        },
-      }
+      { headers: { Authorization: "Basic Q1dCOk5QTG1iZjNUdEVZcmJSRGI=" } }
     );
-    // console.log("token", token.data);
-
-    const requestSendSMS = await axios.post(
-      "https://api-gateway.kyivstar.ua/sandbox/rest/v1beta/sms",
-      {
-        from: "CWB",
-        to: phone,
-        text: text,
-      },
-      { headers: { Authorization: `Bearer ${token.data.access_token}` } }
-    );
-    // console.log("Res: ", requestSendSMS.data);
+    console.log(result);
   } catch (err) {
     console.log(err);
   }
